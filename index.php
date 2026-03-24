@@ -4,13 +4,15 @@
 
     $conn = $usuario->conecta();
 
+
     if ($conn){
         ?>
-        <form method="POST" action="cadastrar.php" >
+        <form method="POST" action="login.php" >
             <input type="text"     placeholder = "digite um nome "   name = "nome" >
             <input type="text"     placeholder = "digite um email "  name = "email" >
             <input type="password" placeholder = "digite uma senha "  name = "senha" >
-            <input type="submit" value= "cadastrar" >
+            <input type="submit" value= "login" >
+            <a href="cadastrar.php">Novo por aqui? cadastre</a>
         
         </form>
        
