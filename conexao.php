@@ -1,14 +1,16 @@
 <?php
-public function conecta(){
-            $dns        = "mysql:dbname=etimUsuario;host=localhost";
-            $userName   = "root";
-            $userPass   = "";
+ function conecta(){      
 
-            try {
-                $this->pdo = new PDO($dns, $userName, $userPass);
-                return true;
-                
-            } catch (\Throwable $th) {
-                return false;
-            }
-        }
+    $dns      = "mysql:dbname=etimusuario;host=localhost";
+    $userName = "root";
+    $userPass = "";
+
+    try{
+        $pdo = new PDO($dns, $userName, $userPass);
+        return $pdo;
+
+    } catch(\Throwable $th){
+        return false;
+    }
+
+}

@@ -1,29 +1,33 @@
 <?php
-session_start();
 
 require "Usuario.class.php";
 require "conexao.php";
+session_start();
 
-$conn = conecta();
-if($conn) {
-    if (isset($_POST['nome'])) {
-        $nome = $_POST['nome'];
-        $email = $_POST['email'];
-        $senha = $_POST['senha'];
-
-        $usuario = new Usuario();
-        $user = $user->checkUser( $email );
-        if ($user) {
-            $user = $usuario->checkPass($email, $senha);
-
-            $_SESSION['nome'] = $nome;
+$usuario = new Usuario();
+if(isset($_POST['nome'])){
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
+   
+    $conn = $usuario->conecta();
+    if($conn ){
+        $user= $usuario->checkUser($email);
+        if(!$user){
+            $usuario->inserirUsuario($nome,$email,$senha);
+            $_SESSION['nome']=$nome;
             header("Location:home.php");
-        } else {
-            echo "Usuario nao cadastro!";
-            header("Location:cadastrar.php");
+            
+        }else{
+            echo "Usuario não cadastrado! vá para o login ";
+            header("Location:home.php");
+            
         }
+    }else{
+        echo"Banco indisponivel, tente mais tarde ";
     }
-} else {
-    echo "Banco indisponivel. tente mais tarde";
-    exit();
+}else{
+    echo "nao veio post";
+
 }
+?>

@@ -7,7 +7,20 @@
         private $senha;
         private $pdo;
 
-        
+        public function conecta(){
+            $dns = "mysql:dbname=etimusuario;host=localhost";
+            $userName = "root";
+            $userPass = "";
+
+            try {
+                $this->pdo = new PDO($dns, $userName, $userPass);
+                return true;
+            } catch (\Throwable $th) {
+                return false;
+            }
+        }
+
+
         public function inserirUsuario($nome, $email, $senha){
             // passo 1 - Criar uma variável com a consulta SQL
             $sql = "INSERT INTO usuario SET nome = :n, email = :e, senha = :s";
@@ -35,8 +48,7 @@
 
         }
         function checkPass($email, $senha){
-            $sql = "SELECT *FROM usuario WHERE email = :e ";
-            $sql = "SELECT *FROM usuario WHERE senha = :s ";
+            $sql = "SELECT * FROM usuario WHERE email = :e AND senha = :s";
             $stmt = $this->pdo ->prepare($sql);
             $stmt-> bindValue(":e", $email);
             $stmt-> bindValue(":s", $senha);

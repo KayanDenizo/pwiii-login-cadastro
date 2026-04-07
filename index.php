@@ -1,20 +1,8 @@
-    <?php
-    require 'Usuario.class.php';
-    $usuario = new Usuario();
+<form method="POST" action="login.php" >
+    <input type="text"     placeholder = "digite um nome "   name = "nome" >
+    <input type="text"     placeholder = "digite um email "  name = "email" >
+    <input type="password" placeholder = "digite uma senha "  name = "senha" >
+    <input type="submit" value= "cadastrar" >
 
-    $conn = $usuario->conecta();
+</form>
 
-
-    if ($conn){
-        ?>
-        <form method="POST" action="login.php" >
-            <input type="text"     placeholder = "digite um nome "   name = "nome" >
-            <input type="text"     placeholder = "digite um email "  name = "email" >
-            <input type="password" placeholder = "digite uma senha "  name = "senha" >
-            <input type="submit" value= "login" >
-            <a href="cadastrar.php">Novo por aqui? cadastre</a>
-        
-        </form>
-       
-        <?php
-        }
