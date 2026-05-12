@@ -28,8 +28,6 @@ git clone https://github.com/KayanDenizo/pwiii-login-cadastro.git
 
 ## 📸 Screenshots
 
-> **Tip:** You can auto-generate a beautiful project mockup image using the **Screenshot** button above!
-
 <p align="center">
   <img width="1282" height="785" alt="image" src="https://github.com/user-attachments/assets/18cf937d-1c64-48e0-990e-dc59a1bcb974" />
 </p>
