@@ -1,151 +1,78 @@
 <?php
 
 require "Usuario.class.php";
-require "conexao.php";
 session_start();
 
 $usuario = new Usuario();
-if(isset($_POST['nome'])){
-    $nome = $_POST['nome'];
+$erro = null;
+
+if (isset($_POST['email']) && isset($_POST['senha'])) {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
-   
-    $conn = $usuario->conecta();
-    if($conn ){
-        $user= $usuario->checkUser($email);
-        if(!$user){
-            $usuario->inserirUsuario($nome,$email,$senha);
-            $_SESSION['nome']=$nome;
-            header("Location:home.php");
-            
-        }else{
-            echo "Usuario não cadastrado! vá para o login ";
-            header("Location:home.php");
-            
-        }
-    }else{
-        echo"Banco indisponivel, tente mais tarde ";
-    }
-}else{
-    echo "nao veio post";
 
+    if ($usuario->conecta()) {
+        $ok = $usuario->checkPass($email, $senha);
+        if ($ok) {
+            $_SESSION['nome'] = $email;
+            header("Location:home.php");
+            exit();
+        }
+
+        $erro = "Credenciais inválidas.";
+    } else {
+        $erro = "Banco indisponível, tente mais tarde.";
+    }
 }
 ?>
 
-<!doctype html>
-<html lang="en" data-bs-theme="dark">
-    <head>
-        <title>Login | Page</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        <!-- Bootstrap CSS v5.3.8 -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-            crossorigin="anonymous"
-        />
-    </head>
-
-    <body>
-        <header>
-            <!-- place navbar here -->
-             <nav
-                class="navbar navbar-expand-sm navbar-light bg-light"
-             >
-                <div class="container">
-                    <a class="navbar-brand" href="#">Navbar</a>
-                    <button
-                        class="navbar-toggler d-lg-none"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#collapsibleNavId"
-                        aria-controls="collapsibleNavId"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="collapsibleNavId">
-                        <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#" aria-current="page"
-                                    >Home
-                                    <span class="visually-hidden">(current)</span></a
-                                >
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Link</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a
-                                    class="nav-link dropdown-toggle"
-                                    href="#"
-                                    id="dropdownId"
-                                    data-bs-toggle="dropdown"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                    >Dropdown</a
-                                >
-                                <div
-                                    class="dropdown-menu"
-                                    aria-labelledby="dropdownId"
-                                >
-                                    <a class="dropdown-item" href="#"
-                                        >Action 1</a
-                                    >
-                                    <a class="dropdown-item" href="#"
-                                        >Action 2</a
-                                    >
-                                </div>
-                            </li>
-                        </ul>
-                        <form class="d-flex my-2 my-lg-0">
-                            <input
-                                class="form-control me-sm-2"
-                                type="text"
-                                placeholder="Search"
-                            />
-                            <button
-                                class="btn btn-outline-success my-2 my-sm-0"
-                                type="submit"
-                            >
-                                Search
-                            </button>
-                        </form>
-                    </div>
-                </div>
-             </nav>
-             
-        </header>
-        <main>
-            <div class="mb-3">
-                <label for="" class="form-label">Email</label>
-                <input
-                    type="email"
-                    class="form-control"
-                    name=""
-                    id=""
-                    aria-describedby="emailHelpId"
-                    placeholder="abc@mail.com"
-                />
-                <small id="emailHelpId" class="form-text text-body-secondary"
-                    >Help text</small
-                >
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+    <div class="container-box">
+        <div class="card">
+            <div class="card-header">
+                <h1>Login</h1>
+                <p>Informe seu email e senha.</p>
             </div>
-            
-        </main>
-        <footer>
-            <!-- place footer here -->
-             
-        </footer>
-        <!-- Bootstrap JavaScript Bundle (includes Popper) -->
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-            crossorigin="anonymous"
-        ></script>
-    </body>
+
+            <div class="card-body">
+                <?php if ($erro) : ?>
+                    <div class="note" style="margin-top:0; color:#ffb4b4; font-size:13px;">
+                        <?= htmlspecialchars($erro) ?>
+                    </div>
+                <?php endif; ?>
+
+                <form method="POST" action="login.php">
+                    <div class="field">
+                        <label for="email">Email</label>
+                        <input id="email" type="email" name="email" placeholder="abc@mail.com" required />
+                    </div>
+
+                    <div class="field">
+                        <label for="senha">Senha</label>
+                        <input id="senha" type="password" name="senha" placeholder="Sua senha" required />
+                    </div>
+
+                    <button class="btn" type="submit">Entrar</button>
+
+                    <div class="top-actions">
+                        <a class="link" href="cadastrar.php">Criar conta</a>
+                        <a class="link" href="tabela.php">Ver tabela</a>
+                    </div>
+
+                    <div class="note">
+                        Se ainda não tiver conta, crie em <b>cadastrar.php</b>.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
+

@@ -29,18 +29,48 @@ if (isset($_POST['nome'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Usuarios</title>
+    <title>Cadastrar Usuários</title>
+    <link rel="stylesheet" href="../css/style.css" />
 </head>
 
 <body>
-    <h2>Cadastro De Usuários</h2>
-    <form method="POST" action="login.php">
-        <input type="text" name="nome" placeholder="Informe o nome">
-        <input type="text" name="email" placeholder="Informe seu email">
-        <input type="text" name="senha" placeholder="Informe a senha">
-        <input type="submit" name="btn" value="Cadastrar">
-    </form>
+    <div class="container-box">
+        <div class="card">
+            <div class="card-header">
+                <h1>Cadastro de Usuários</h1>
+                <p>Preencha os dados para cadastrar no banco.</p>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="cadastrar.php">
+                    <div class="field">
+                        <label for="nome">Nome</label>
+                        <input id="nome" type="text" name="nome" placeholder="Informe o nome" required />
+                    </div>
 
+                    <div class="field">
+                        <label for="email">Email</label>
+                        <input id="email" type="email" name="email" placeholder="Informe seu email" required />
+                    </div>
+
+                    <div class="field">
+                        <label for="senha">Senha</label>
+                        <input id="senha" type="password" name="senha" placeholder="Informe a senha" required />
+                    </div>
+
+                    <button class="btn" type="submit" name="btn">Cadastrar</button>
+
+                    <div class="top-actions">
+                        <a class="link" href="tabela.php">Ver tabela</a>
+                        <a class="link" href="login.php">Ir para login</a>
+                    </div>
+
+                    <div class="note">
+                        Dica: o email precisa ser único.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

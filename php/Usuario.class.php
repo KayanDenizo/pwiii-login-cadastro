@@ -8,7 +8,7 @@
         private $pdo;
 
         public function conecta(){
-            $dns = "mysql:dbname=etimusuario;host=localhost";
+            $dns = "mysql:dbname=etimUsuario;host=localhost";
             $userName = "root";
             $userPass = "";
 
@@ -19,6 +19,14 @@
                 return false;
             }
         }
+
+        public function listarUsuarios(){
+            $sql = "SELECT id, nome, email, senha FROM usuario";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
 
 
         public function inserirUsuario($nome, $email, $senha){
