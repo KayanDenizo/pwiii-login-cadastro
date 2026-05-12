@@ -31,12 +31,23 @@ git clone https://github.com/KayanDenizo/pwiii-login-cadastro.git
 > **Tip:** You can auto-generate a beautiful project mockup image using the **Screenshot** button above!
 
 <p align="center">
-  <img src="https://via.placeholder.com/800x400?text=Main+Application+View" alt="Main Application View" width="80%"/>
+  <img width="1282" height="785" alt="image" src="https://github.com/user-attachments/assets/18cf937d-1c64-48e0-990e-dc59a1bcb974" />
 </p>
 
 <p align="center">
-  <img src="https://via.placeholder.com/800x400?text=Feature+Showcase" alt="Feature Showcase" width="80%"/>
+  <img width="1003" height="791" alt="image" src="https://github.com/user-attachments/assets/5aaeeafe-b69b-421a-865b-9ee728d18698" />
 </p>
+
+<p align="center">
+  <img width="1918" height="478" alt="image" src="https://github.com/user-attachments/assets/62a7cf99-8b79-4688-940c-a3752812c617" />
+</p>
+
+
+<p align="center">
+  <img width="1628" height="798" alt="image" src="https://github.com/user-attachments/assets/3a2d5c4b-a455-4c41-a353-5470fa79e1e6" />
+</p>
+
+
 
 ## 📁 Project Structure
 
