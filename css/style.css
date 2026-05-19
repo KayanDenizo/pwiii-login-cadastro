@@ -73,6 +73,7 @@ input:focus{
 }
 
 .btn{
+  transition: 0.4s ease-in-out;
   display:inline-flex;
   align-items:center;
   justify-content:center;
@@ -156,4 +157,11 @@ tr:last-child td{border-bottom:0;}
     color: #fbfbfb;
     font-size: 20px;
     padding: 10px 20px;
+}
+
+.btn:hover {
+  transition: 0.3s ease-in-out;
+  transform: scale(1.06);
+  background:linear-gradient(90deg, var(--primary), var(--primary2));
+
 }
