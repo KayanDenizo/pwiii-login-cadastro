@@ -27,6 +27,24 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        public function buscarUsuarioPorId($id){
+            $sql = "SELECT id, nome, email, senha FROM usuario WHERE id = :id";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
+
+        public function alterarUsuario($id, $nome, $email, $senha){
+            $sql = "UPDATE usuario SET nome = :n, email = :e, senha = :s WHERE id = :id";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+            $stmt->bindValue(":n", $nome);
+            $stmt->bindValue(":e", $email);
+            $stmt->bindValue(":s", $senha);
+            return $stmt->execute();
+        }
+
 
 
         public function inserirUsuario($nome, $email, $senha){

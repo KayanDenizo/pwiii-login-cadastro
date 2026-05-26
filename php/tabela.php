@@ -35,6 +35,7 @@ if ($usuario->conecta()) {
                         <th>Nome</th>
                         <th>Email</th>
                         <th>Senha</th>
+                        <th>Acoes</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,6 +45,9 @@ if ($usuario->conecta()) {
                             <td><?= htmlspecialchars($r['nome']) ?></td>
                             <td><?= htmlspecialchars($r['email']) ?></td>
                             <td><?= htmlspecialchars($r['senha']) ?></td>
+                            <td>
+                                <a class="link badge" href="editar.php?id=<?= urlencode($r['id']) ?>">Editar</a>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
