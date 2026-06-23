@@ -83,5 +83,25 @@
             return $stmt->rowCount()>0;
 
         }
+        
+        public function excluirUsuario($id){
+            $sql = "DELETE FROM usuario WHERE id = :id";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+            return $stmt->execute();
+        }
+
+        public function excluirUsuarios(array $ids){
+            if (empty($ids)) return false;
+            $placeholders = implode(',', array_fill(0, count($ids), '?'));
+            $sql = "DELETE FROM usuario WHERE id IN ($placeholders)";
+            $stmt = $this->pdo->prepare($sql);
+
+            foreach ($ids as $i => $val) {
+                $stmt->bindValue($i + 1, (int)$val, PDO::PARAM_INT);
+            }
+
+            return $stmt->execute();
+        }
     }
 ?>
