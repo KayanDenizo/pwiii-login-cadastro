@@ -73,7 +73,7 @@ if ($usuario->conecta()) {
                                     <td><?= htmlspecialchars($r['senha']) ?></td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Ações">
-                                            <a class="btn btn-sm btn-edit" href="editar.php?id=<?= urlencode($r['id']) ?>">Editar</a>
+                                            <a class="btn btn-sm btn-edit" href="editar_modelo.php?id=<?= urlencode($r['id']) ?>">Editar</a>
                                             <a class="btn btn-sm btn-delete" href="deletar.php?id=<?= urlencode($r['id']) ?>" onclick="return confirm('Excluir este usuário?');">Excluir</a>
                                         </div>
                                     </td>
